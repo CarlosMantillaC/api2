@@ -6,10 +6,6 @@ const db = require('../../config/db');
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email y contraseña son requeridos' });
-  }
-
   try {
     const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
 
