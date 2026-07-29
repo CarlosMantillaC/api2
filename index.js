@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 const express = require("express");
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
 const authRoutes = require("./routes/auth/authRoutes");
 
 const app = express();
@@ -11,6 +13,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.json({ message: "¡Servidor Express corriendo correctamente!" });
 });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/auth", authRoutes);
 
